@@ -7,7 +7,7 @@ objects.
 Installation
 ------------
 
-`npm install loom-generators-ember --save`
+`npm install loom-generators-ember-appkit --save`
 
 The `--save` is important, loom needs to read your package.json to find
 the generators.
