@@ -1,6 +1,3 @@
-var Ember = require('ember');
-
-Ember.Handlebars.registerBoundHelper('{{helperName}}', function(val) {
+export default Ember.Handlebars.makeBoundHelper(function(val) {
   return val;
 });
-
