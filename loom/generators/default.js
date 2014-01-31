@@ -24,7 +24,9 @@ generator.present = function(next, env) {
   }
   next({
     objectName: inflector.objectify(name),
-    params: params
+    params: params,
+    dasherizedObjectName: inflector.dasherize(name),
+    humanizedObjectName: inflector.humanize(name)
   });
 };
 

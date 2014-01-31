@@ -6,12 +6,16 @@ var sinon = require('sinon');
 describe('component', function() {
 
   it('renders the template correctly', function(done) {
-    var locals = {objectName: 'XFooComponent'};
+    var locals = {objectName: 'XFooComponent', 
+                  dasherizedObjectName: 'x-foo-component',
+                  humanizedObjectName: 'X foo component'};
     render('app/components/component.js.hbs', locals, function(component) {
       render('app/templates/components/component.hbs.hbs', locals, function(template) {
-        loom('-sq component x-foo', function(env) {
-          env.out.should.equal(component + template);
-          done();
+        render('tests/unit/components/component_tests.js.hbs', locals, function(test) {
+          loom('-sq component x-foo', function(env) {
+            env.out.should.equal(component + template + test);
+            done();
+          });
         });
       });
     });

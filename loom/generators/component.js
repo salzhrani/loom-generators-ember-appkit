@@ -1,4 +1,5 @@
 var componentize = require('../../lib/componentize_template');
+var testerize = require('../../lib/testerize_template');
 var validateComponent = require('../../lib/validate_component');
 var parent = require('./default');
 var path = require('path');
@@ -14,16 +15,30 @@ generator.before = function(next, env) {
 
 generator.templates = [
   app+'/components/component.js.hbs',
-  app+'/templates/components/component.hbs.hbs'
+  app+'/templates/components/component.hbs.hbs',
+  'tests/unit/components/component_tests.js.hbs'
 ];
 
 generator.savePath = function(next, env, template) {
   parent.savePath(function(savePath) {
-    next(isTemplate(savePath) ? componentize(savePath) : savePath);
+    next(normalizeSavePath(savePath));
   }, env, template);
+};
+
+function normalizeSavePath(savePath) {
+  if (isTest(savePath)) {
+    return testerize(savePath);
+  } else if (isTemplate(savePath)){
+    return componentize(savePath);
+  } else {
+    return savePath;
+  }
 };
 
 function isTemplate(savePath) {
   return path.extname(savePath) === '.hbs';
-}
+};
 
+function isTest(savePath) {
+  return /(_tests.js)/.test(savePath);
+};

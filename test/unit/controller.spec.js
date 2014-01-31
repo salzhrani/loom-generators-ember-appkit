@@ -13,6 +13,8 @@ describe('controller generator', function() {
         locals.should.eql({
           objectName: 'ApplicationController',
           params: {},
+          dasherizedObjectName: 'application-controller',
+          humanizedObjectName: 'Application controller',
           type: 'Array'
         });
         msg.prompt = prompt;
@@ -30,6 +32,8 @@ describe('controller generator', function() {
         locals.should.eql({
           objectName: 'ApplicationController',
           params: {type: 'array'},
+          dasherizedObjectName: 'application-controller',
+          humanizedObjectName: 'Application controller',
           type: 'Array'
         });
         done();
