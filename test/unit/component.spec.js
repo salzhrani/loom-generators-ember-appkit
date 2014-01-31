@@ -4,7 +4,7 @@ var sinon = require('sinon');
 
 describe('component generator', function() {
   describe('before', function() {
-    it('validates whether or not its a component', function(done) {
+    it('validates whether or not it is a component', function(done) {
       var mock = sinon.mock(msg);
       mock.expects('error').once().withArgs("Components must have a '-' character");
       var env = { args: ['user'] };
@@ -18,6 +18,13 @@ describe('component generator', function() {
 
   describe('savePath', function() {
     var env = { args: ['x-foo'], rawName: 'x-foo', name: 'component'};
+
+    it('saves the tests to the right place', function(done) {
+      generator.savePath(function(path) {
+        path.should.equal('tests/unit/components/x_foo_tests.js');
+        done();
+      }, env, generator.templates[2]);
+    });
 
     it('saves the template to the right place', function(done) {
       generator.savePath(function(path) {
