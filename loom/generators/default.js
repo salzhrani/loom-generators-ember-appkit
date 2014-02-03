@@ -19,13 +19,14 @@ generator.before = function(next, env) {
 generator.present = function(next, env) {
   var params = env.params;
   var name = env.args[0];
+  var safeName = name;
   if (appendable(env.name)) {
     name += '-'+env.name;
   }
   next({
     objectName: inflector.objectify(name),
     params: params,
-    dasherizedObjectName: inflector.dasherize(name),
+    dasherizedObjectName: inflector.dasherize(safeName),
     humanizedObjectName: inflector.humanize(name)
   });
 };
