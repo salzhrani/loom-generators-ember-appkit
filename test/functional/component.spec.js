@@ -7,7 +7,7 @@ describe('component', function() {
 
   it('renders the template correctly', function(done) {
     var locals = {objectName: 'XFooComponent', 
-                  dasherizedObjectName: 'x-foo-component',
+                  dasherizedObjectName: 'x-foo',
                   humanizedObjectName: 'X foo component'};
     render('app/components/component.js.hbs', locals, function(component) {
       render('app/templates/components/component.hbs.hbs', locals, function(template) {
