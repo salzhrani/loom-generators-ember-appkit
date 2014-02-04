@@ -13,7 +13,7 @@ describe('controller generator', function() {
         locals.should.eql({
           objectName: 'ApplicationController',
           params: {},
-          dasherizedObjectName: 'application-controller',
+          dasherizedObjectName: 'application',
           humanizedObjectName: 'Application controller',
           type: 'Array'
         });
@@ -32,7 +32,7 @@ describe('controller generator', function() {
         locals.should.eql({
           objectName: 'ApplicationController',
           params: {type: 'array'},
-          dasherizedObjectName: 'application-controller',
+          dasherizedObjectName: 'application',
           humanizedObjectName: 'Application controller',
           type: 'Array'
         });
