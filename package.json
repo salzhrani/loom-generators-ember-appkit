@@ -1,6 +1,6 @@
 {
   "name": "loom-generators-ember-appkit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "generator set use in ember app kit",
   "main": "index.js",
   "scripts": {
