@@ -1,13 +1,17 @@
+var inflector = require('../../lib/inflector');
+var defaultGenerator = require('./default');
 var parent = require('./default');
-
 var generator = module.exports = Object.create(parent);
+var app = generator.appPath;
 
-generator.present = function(name) {
+generator.present = function(next,env) {
   // skip all the stuff inbetween
-  var fields = arguments[arguments.length - 2];
-  var locals = parent.present(name);
-  locals.fields = parseFields(fields);
-  return locals;
+  var fields = env.params;
+  parent.present(function(locals){
+    locals.fields = parseFields(fields);
+    locals.serverFields = parseServerFields(fields);
+    next(locals);
+  },env);  
 };
 
 function parseFields(map) {
@@ -20,4 +24,17 @@ function parseFields(map) {
   }
   return fields;
 }
-
+function parseServerFields(map) {
+  var fields = [];
+  for (var key in map) {
+    fields.push({name: key, type: inflector.capitalize(map[key]), comma: ','});
+  }
+  if (fields.length) {
+    fields[fields.length - 1].comma = '';
+  }
+  return fields;
+}
+generator.templates = [
+  app+'/models/model.js.hbs',
+  'server/models/model.js.hbs',
+  ];

@@ -1,0 +1,8 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var {{objectName}} = new Schema({
+{{#each serverFields}}
+  {{name}}: {type:{{type}} }{{comma}}
+{{/each}}
+});
+module.exports = mongoose.model('{{objectName}}', {{objectName}});

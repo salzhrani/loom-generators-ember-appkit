@@ -5,7 +5,7 @@ var msg = require('loom/lib/message');
 var generator = module.exports = Object.create(genericGenerator);
 
 var app = generator.appPath = 'app';
-
+var server = 'server';
 generator.before = function(next, env) {
   if (!env.args.length) {
     msg.error("You must specify a resource name, ie 'generate "+env.name+" user'");
@@ -33,7 +33,7 @@ generator.present = function(next, env) {
 
 generator.template = function(next, env) {
   var plural = inflector.pluralize(env.name);
-  next(app+'/'+plural+'/'+env.name+'.js.hbs');
+  next([app+'/'+plural+'/'+env.name+'.js.hbs',server+'/'+plural+'/'+env.name+'.js.hbs']);
 };
 
 function appendable(generatorName) {
